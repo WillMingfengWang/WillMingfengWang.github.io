@@ -150,16 +150,47 @@
             <h3 id="0-流体力学预备知识"><a href="#0-流体力学预备知识" class="headerlink" title="0.流体力学预备知识"></a>0.流体力学预备知识</h3><h3 id="内容提要"><a href="#内容提要" class="headerlink" title="内容提要"></a>内容提要</h3><ul>
 <li>爱因斯坦求和约定</li>
 <li>张量计算</li>
+<li>$\nabla$算子</li>
 </ul>
+<hr>
 <h3 id="1-流体静力学"><a href="#1-流体静力学" class="headerlink" title="1.流体静力学"></a>1.流体静力学</h3><h4 id="内容提要-1"><a href="#内容提要-1" class="headerlink" title="内容提要"></a>内容提要</h4><ul>
-<li>体积力Body Force与表面力Surface Force</li>
+<li><strong>体积力Body Force</strong>与<strong>表面力Surface Force</strong></li>
 <li>流体静力学分析</li>
-<li>欧拉Euler静力学方程</li>
+<li>欧拉Euler静力学方程(欧拉方程)</li>
 </ul>
-<h4 id="补充知识之泰勒展开"><a href="#补充知识之泰勒展开" class="headerlink" title="补充知识之泰勒展开"></a>补充知识之泰勒展开</h4><h3 id="2-如何描述流体运动"><a href="#2-如何描述流体运动" class="headerlink" title="2.如何描述流体运动"></a>2.如何描述流体运动</h3><h4 id="内容提要-2"><a href="#内容提要-2" class="headerlink" title="内容提要"></a>内容提要</h4><ul>
+<h4 id="1-1Euler静力学公式"><a href="#1-1Euler静力学公式" class="headerlink" title="1.1Euler静力学公式"></a>1.1Euler静力学公式</h4><h5 id="1-1-1推导过程"><a href="#1-1-1推导过程" class="headerlink" title="1.1.1推导过程"></a>1.1.1推导过程</h5><p>$$<br>\begin{aligned}<br>\vec{F_b} &amp;={F_{b,x}}\vec{i}+{F_{b,y}}\vec{j}+{F_{b,z}}\vec{k}\<br>&amp;=[{f_{b,x}}\vec{i}+{f_{b,y}}\vec{j}+{f_{b,z}}\vec{k}]\rho dxdydz<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>\vec{F_s}&amp;={F_{s,x}}\vec{i}+{F_{s,y}}\vec{j}+{F_{s,z}}\vec{k}\<br>&amp;=({p_x}dydz)\vec{i}+({p_y}dxdz)\vec{j}+({p_z}dxdy)\vec{k}<br>\end{aligned}<br>$$</p>
+<ul>
+<li>体积力$x$方向：流体微团$x$方向的体积力大小${F_{b,x}}={f_{b,x}}\rho dxdydz$</li>
+<li>表面力$y$方向：流体微团$x$方向左侧的正压力大小$F_{s,x,left}=[p-\frac{\partial{p}}{\partial{x}}{\frac{dx}{2}}]dydz$，微团右侧的正压力大小为$=F_{s,x,right}=[p+{\frac{\partial{p}}{\partial{x}}}{\frac{dx}{2}}]dydz$</li>
+</ul>
+<p>$$<br>\sum{F_{x}}={F_{b,x}}+{F_{s,x}}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>\sum{F_x}&amp;=f_{b,x}\rho dxdydz+[p-\frac{\partial{p}}{\partial{x}}{\frac{dx}{2}}]dydz-[p+\frac{\partial{p}}{\partial{x}}{\frac{dx}{2}}]dydz\<br>&amp;=f_{b,x}\rho-\frac{\partial{p}}{\partial{x}}=0<br>\end{aligned}<br>$$</p>
+<p>$$<br>f_{b,x}=\frac{1}{\rho}\frac{\partial{p}}{\partial{x}}<br>$$</p>
+<ul>
+<li>体积力$y$方向：流体微团$x$方向的体积力大小${F_{b,y}}={f_{b,y}}\rho dxdydz$</li>
+<li>表面力$y$方向：流体微团$y$方向前侧的正压力为$F_{s,y,front}=[p-\frac{\partial{p}}{\partial{y}}{\frac{dy}{2}}]dxdz$，微团后侧的正压力为$F_{s,y,back}=[p+\frac{\partial{p}}{\partial{y}}{\frac{dy}{2}}]dxdz$</li>
+</ul>
+<p>$$<br>f_{b,y}=\frac{1}{\rho}\frac{\partial{p}}{\partial{y}}<br>$$</p>
+<ul>
+<li>体积力$z$方向：流体微团$z$方向的体积力大小${F_{b,z}}={f_{b,z}}\rho dxdydz$</li>
+<li>表面力$z$方向：流体微团$z$方向下侧的正压力为$F_{s,z,down}=[p-\frac{\partial{p}}{\partial{z}}{\frac{dz}{2}}]dxdy$，微团上侧的正压力为$F_{s,z,up}=[p+\frac{\partial{p}}{\partial{z}}{\frac{dz}{2}}]dxdy$</li>
+</ul>
+<p>$$<br>f_{b,z}=\frac{1}{\rho}\frac{\partial{p}}{\partial{z}}<br>$$</p>
+<h5 id="1-1-2-不同形式"><a href="#1-1-2-不同形式" class="headerlink" title="1.1.2 不同形式"></a>1.1.2 不同形式</h5><ol>
+<li>正常形式</li>
+</ol>
+<p>$$<br>\begin{cases}<br>f_{b,x}=\frac{1}{\rho}\frac{\partial{p}}{\partial{x}}\<br>f_{b,y}=\frac{1}{\rho}\frac{\partial{p}}{\partial{y}}\<br>f_{b,z}=\frac{1}{\rho}\frac{\partial{p}}{\partial{z}}<br>\end{cases}<br>$$</p>
+<ol start="2">
+<li>矢量形式</li>
+</ol>
+<p>$$<br>\vec{f}=\frac{1}{\rho}\nabla{p}<br>$$</p>
+<h4 id="1-2泰勒公式"><a href="#1-2泰勒公式" class="headerlink" title="1.2泰勒公式"></a>1.2泰勒公式</h4><hr>
+<h3 id="2-如何描述流体运动"><a href="#2-如何描述流体运动" class="headerlink" title="2.如何描述流体运动"></a>2.如何描述流体运动</h3><h4 id="内容提要-2"><a href="#内容提要-2" class="headerlink" title="内容提要"></a>内容提要</h4><ul>
 <li>欧拉法Euler和拉格朗日法Lagrange</li>
-<li>物质导数Material Derivative（随体导数）</li>
+<li>随体导数</li>
 </ul>
+<hr>
 <h3 id="3-基本方程"><a href="#3-基本方程" class="headerlink" title="3.基本方程"></a>3.基本方程</h3><h4 id="3-1质量守恒定律-Mass-Equation"><a href="#3-1质量守恒定律-Mass-Equation" class="headerlink" title="3.1质量守恒定律 Mass Equation"></a>3.1质量守恒定律 Mass Equation</h4><h4 id="3-2动量守恒定律-Momentum-Equation"><a href="#3-2动量守恒定律-Momentum-Equation" class="headerlink" title="3.2动量守恒定律 Momentum Equation"></a>3.2动量守恒定律 Momentum Equation</h4><h4 id="3-3能量守恒定律-Energy-Equation"><a href="#3-3能量守恒定律-Energy-Equation" class="headerlink" title="3.3能量守恒定律 Energy Equation"></a>3.3能量守恒定律 Energy Equation</h4>
         </div>
 
