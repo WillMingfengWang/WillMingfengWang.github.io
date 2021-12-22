@@ -199,16 +199,16 @@
 <h4 id="euler静力学公式">1.1Euler静力学公式</h4>
 <h5 id="推导过程">1.1.1推导过程</h5>
 <p><span class="math display">\[
-\vec{F_b}={F_{b,x}}\vec{i}+{F_{b,y}}\vec{j}+{F_{b,z}}\vec{k}
+\begin{aligned}
+\vec{F_b} &amp;={F_{b,x}}\vec{i}+{F_{b,y}}\vec{j}+{F_{b,z}}\vec{k}\\
+&amp;=[{f_{b,x}}\vec{i}+{f_{b,y}}\vec{j}+{f_{b,z}}\vec{k}]\rho dxdydz
+\end{aligned}
 \]</span></p>
 <p><span class="math display">\[
-\vec{F_b}=[{f_{b,x}}\vec{i}+{f_{b,y}}\vec{j}+{f_{b,z}}\vec{k}]\rho dxdydz
-\]</span></p>
-<p><span class="math display">\[
-\vec{F_s}={F_{s,x}}\vec{i}+{F_{s,y}}\vec{j}+{F_{s,z}}\vec{k}\\
-\]</span></p>
-<p><span class="math display">\[
-\vec{F_s}=({p_x}dydz)\vec{i}+({p_y}dxdz)\vec{j}+({p_z}dxdy)\vec{k}
+\begin{aligned}
+\vec{F_s}&amp;={F_{s,x}}\vec{i}+{F_{s,y}}\vec{j}+{F_{s,z}}\vec{k}\\
+&amp;=({p_x}dydz)\vec{i}+({p_y}dxdz)\vec{j}+({p_z}dxdy)\vec{k}
+\end{aligned}
 \]</span></p>
 <ul>
 <li>体积力<span class="math inline">\(x\)</span>方向：流体微团<span class="math inline">\(x\)</span>方向的体积力大小<span class="math inline">\({F_{b,x}}={f_{b,x}}\rho dxdydz\)</span></li>
@@ -218,8 +218,11 @@
 \sum{F_{x}}={F_{b,x}}+{F_{s,x}}
 \]</span></p>
 <p><span class="math display">\[
-\sum{F_x}=f_{b,x}\rho dxdydz+[p-\frac{\partial{p}}{\partial{x}}{\frac{dx}{2}}]dydz-[p+\frac{\partial{p}}{\partial{x}}{\frac{dx}{2}}]dydz
-\\=f_{b,x}\rho-\frac{\partial{p}}{\partial{x}}=0
+\begin{aligned}
+\sum{F_x}&amp;=f_{b,x}\rho dxdydz+[p-\frac{\partial{p}}{\partial{x}}{\frac{dx}{2}}]dydz-[p+\frac{\partial{p}}{\partial{x}}{\frac{dx}{2}}]dydz\\
+&amp;=f_{b,x}\rho-\frac{\partial{p}}{\partial{x}}\\&amp;
+=0
+\end{aligned}
 \]</span></p>
 <p><span class="math display">\[
 f_{b,x}=\frac{1}{\rho}\frac{\partial{p}}{\partial{x}}
