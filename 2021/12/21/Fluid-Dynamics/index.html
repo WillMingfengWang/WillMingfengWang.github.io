@@ -259,18 +259,167 @@ f_{b,z}=\frac{1}{\rho}\frac{\partial{p}}{\partial{z}}
 \vec{f}=\frac{1}{\rho}\nabla{p}
 \]</span></p>
 <h4 id="泰勒公式">1.2泰勒公式</h4>
+<p>泰勒公式的意义在于用一个简单的多项式函数逼近一个给定的复杂函数，具有化繁为简的功能，其一般展开式如下（在<span class="math inline">\(x_0\)</span>处展开，可以换为任意一个数）： <span class="math display">\[
+f(x)=f(x_0)+f\prime(x_0)(x-x_0)+\frac{f\prime\prime(x_0)}{2!}{(x-x_0)}^2+\cdots+r
+\]</span> 也可以写为偏导数形式： <span class="math display">\[
+f(x)=f(x_0)+\frac { \partial { p } } { \partial { x } } (x-x_0)+\frac { { \partial^2(p) } } { { \partial^2(x) } } {2!}{(x-x_0)}^2+\cdots+r
+\]</span> 因流体微团中心<span class="math inline">\((x,y,z)\)</span>处的压力为<span class="math inline">\(p\)</span>（以流体微团中心为远点），则距离中心左侧的压力为： <span class="math display">\[
+\begin{aligned}
+p_{s,x,left}&amp;=p+\frac{\partial{p}}{\partial{x}}(-\frac{dx}{2}-0)\\
+&amp;=p-\frac{\partial{p}}{\partial{x}}\frac{dx}{2}
+\end{aligned}
+\]</span> 同理，可以计算前、后、左、右、上、下六个面的压力。</p>
 <hr />
 <h3 id="如何描述流体运动">2.如何描述流体运动</h3>
 <h4 id="内容提要-2">内容提要</h4>
 <ul>
-<li>欧拉法Euler和拉格朗日法Lagrange</li>
+<li>Euler描述法和Lagrange描述法</li>
 <li>随体导数</li>
 </ul>
+<h4 id="流体运动的描述方法">2.1流体运动的描述方法</h4>
+<h4 id="随体导数">2.2随体导数</h4>
+<p>随体导数又称物质导数(Material Derivative)。</p>
+<p>在Euler法中，速度是指某一时刻位于某一空间点处的流体质点的速度，因此速度和加速度都有关，即： <span class="math display">\[
+\vec{V}(x,y,z,t)=u(x,y,z,t)\vec{i}+v(x,y,z,t)\vec{j}+w(x,y,z,t)\vec{k}
+\]</span> 加速度<span class="math inline">\(\vec{a}\)</span>为： <span class="math display">\[
+\begin{aligned}
+\vec{a}&amp;=\frac{d\vec{V}}{dt}\\
+&amp;=\frac{du}{dt}\vec{i}+\frac{dv}{dt}\vec{j}+\frac{dw}{dt}\vec{k}
+\end{aligned}
+\]</span> 在Euler法中，因速度是关于时间和空间位置的函数即<span class="math inline">\(a_x(x,y,z,t)\)</span>，则<span class="math inline">\(x\)</span>方向的加速度<span class="math inline">\(a_x\)</span>为： <span class="math display">\[
+\begin{aligned}
+a_x&amp;=\frac{du}{dt}\\
+&amp;=\frac{\partial{u}}{\partial{t}}+\frac{\partial{u}}{\partial{x}}\frac{\partial{x}}{\partial{t}}+\frac{\partial{u}}{\partial{y}}\frac{\partial{y}}{\partial{t}}+\frac{\partial{u}}{\partial{z}}\frac{\partial{z}}{\partial{t}}\\
+&amp;=\frac{\partial{u}}{\partial{t}}+u\frac{\partial{u}}{\partial{x}}+v\frac{\partial{u}}{\partial{y}}+w\frac{\partial{u}}{\partial{z}}
+\end{aligned}
+\]</span> 同理，<span class="math inline">\(y\)</span>方向和<span class="math inline">\(z\)</span>方向的加速度分别为： <span class="math display">\[
+a_y=\frac{\partial{v}}{\partial{t}}+u\frac{\partial{v}}{\partial{x}}+v\frac{\partial{v}}{\partial{y}}+w\frac{\partial{v}}{\partial{x}}
+\]</span></p>
+<p><span class="math display">\[
+a_z=\frac{\partial{w}}{\partial{t}}+u\frac{\partial{w}}{\partial{x}}+v\frac{\partial{w}}{\partial{y}}+w\frac{\partial{w}}{\partial{x}}
+\]</span></p>
+<p>综上，加速度为： <span class="math display">\[
+\begin{aligned}
+\vec{a}&amp;=[\frac{\partial{u}}{\partial{t}}+u\frac{\partial{u}}{\partial{x}}+v\frac{\partial{v}}{\partial{y}}+w\frac{\partial{w}}{\partial{z}}]\vec{i}\\
+&amp;+[\frac{\partial{v}}{\partial{t}}+u\frac{\partial{u}}{\partial{x}}+v\frac{\partial{v}}{\partial{y}}+w\frac{\partial{w}}{\partial{x}}]\vec{j}\\
+&amp;+[\frac{\partial{w}}{\partial{t}}+u\frac{\partial{u}}{\partial{x}}+v\frac{\partial{v}}{\partial{y}}+w\frac{\partial{w}}{\partial{x}}]\vec{k}
+\end{aligned}
+\]</span> 将其写为矢量形式： <span class="math display">\[
+\vec{a}=\frac{\partial{\vec{V}}}{\partial{t}}+(\vec{V}\cdot\nabla){\vec{V}}
+\]</span></p>
 <hr />
 <h3 id="基本方程">3.基本方程</h3>
 <h4 id="质量守恒定律-mass-equation">3.1质量守恒定律 Mass Equation</h4>
+<p>质量守恒定律又叫连续性方程，首先从微控制体即微分的角度进行连续性方程的推导。</p>
+<p>假设流体由左侧、下侧和前侧流入微控制体，由右侧、上侧和后侧流出微控制体。由此可以计算流入和流出微控制体的质量，并将两者做差即可得到微控制体质量的变化。</p>
+<p>在进行计算之前，首先了解一个概念<em>质量流量</em>，即单位时间内流过控制面的质量，三个流入方向上的质量流量分别为： <span class="math display">\[
+\begin{cases}
+x:\rho{u}\\
+y:\rho{v}\\
+z:\rho{w}
+\end{cases}
+\]</span> 则单位时间内由三个方向流入控制体的质量为： <span class="math display">\[
+\begin{cases}
+x:\rho{u}{\rm dydz}\\
+y:\rho{v}{\rm dxdz}\\
+z:\rho{w}{\rm dxdy}
+\end{cases}
+\]</span> 由泰勒展开式可知，三个流出方向上的质量流量为： <span class="math display">\[
+\begin{cases}
+x:\rho{u}+\frac{\partial{(\rho{u})}}{\partial{x}}{\rm dx}\\
+y:\rho{v}+\frac{\partial{(\rho{v})}}{\partial{y}}{\rm dy}\\
+z:\rho{w}+\frac{\partial{(\rho{w})}}{\partial{z}}{\rm dz}
+\end{cases}
+\]</span> 则单位时间内由三个方向流出控制体的质量为： <span class="math display">\[
+\begin{cases}
+x:[\rho{u}+\frac{\partial{(\rho{u})}}{\partial{x}}{\rm dx}]\\
+y:[\rho{v}+\frac{\partial{(\rho{v})}}{\partial{y}}{\rm dy}]\\
+z:[\rho{w}+\frac{\partial{(\rho{w})}}{\partial{z}}{\rm dz}]
+\end{cases}
+\]</span> 三个方向的质量差值可得： <span class="math display">\[
+\begin{cases}
+x:[\rho{u}+\frac{\partial{(\rho{u})}}{\partial{x}}{\rm dx}]{\rm {dydz}}-\rho{u}{\rm dydz}=\frac{\partial{(\rho{u})}}{\partial{x}}{\rm dxdydz}\\
+y:[\rho{v}+\frac{\partial{(\rho{v})}}{\partial{y}}{\rm dy}]{\rm {dxdz}}-\rho{v}{\rm dxdz}=\frac{\partial{(\rho{v})}}{\partial{y}}{\rm dxdydz}\\
+z:[\rho{w}+\frac{\partial{(\rho{w})}}{\partial{z}}{\rm dz}]{\rm {dxdy}}-\rho{w}{\rm dxdy}=\frac{\partial{(\rho{w})}}{\partial{z}}{\rm dxdydz}
+\end{cases}
+\]</span> 从整个微控制体着手，单位时间内流体质量的增加为： <span class="math display">\[
+\begin{aligned}
+\frac{\partial{m}}{\partial{t}}&amp;=\frac{\partial{\rho{B}}}{\partial{t}}\\
+&amp;=\frac{\partial{\rho}}{\partial{t}}
+\end{aligned}
+\]</span> 由质量守恒定律可知，流体质量的增加等于流入控制体的质量： <span class="math display">\[
+-\frac{\partial{\rho{ {\rm dxdydz} }}}{\partial{t}}=\frac{\partial{(\rho{u})}}{\partial{x}}{\rm dxdydz}+\frac{\partial{(\rho{v})}}{\partial{y}}{\rm dxdydz}+\frac{\partial{(\rho{w})}}{\partial{z}}{\rm dxdydz}
+\]</span> 化简后可得： <span class="math display">\[
+-\frac{\partial{\rho}}{\partial{t}}=\frac{\partial{(\rho{u})}}{\partial{x}}+\frac{\partial{(\rho{v})}}{\partial{y}}+\frac{\partial{(\rho{w})}}{\partial{z}}\\
+\frac{\partial{\rho}}{\partial{t}}+\frac{\partial{(\rho{u})}}{\partial{x}}+\frac{\partial{(\rho{v})}}{\partial{y}}+\frac{\partial{(\rho{w})}}{\partial{z}}=0
+\]</span> 矢量形式为： <span class="math display">\[
+\frac{\partial{\rho}}{\partial{t}}+\nabla{\cdot}(\rho{\vec{V}})=0
+\]</span></p>
 <h4 id="动量守恒定律-momentum-equation">3.2动量守恒定律 Momentum Equation</h4>
 <h4 id="能量守恒定律-energy-equation">3.3能量守恒定律 Energy Equation</h4>
+<h3 id="需要记忆的公式">4.需要记忆的公式</h3>
+<h4 id="欧拉静力学方程">4.1 欧拉静力学方程</h4>
+<p><span class="math display">\[
+\begin{cases}
+f_{b,x}=\frac{1}{\rho}\frac{\partial{p_x}}{\partial{x}}\\
+f_{b,y}=\frac{1}{\rho}\frac{\partial{p_y}}{\partial{y}}\\
+f_{b,z}=\frac{1}{\rho}\frac{\partial{p_z}}{\partial{z}}
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+\vec{f}=\frac{1}{\rho}\nabla{p}
+\]</span></p>
+<h4 id="随体导数-1">4.2随体导数</h4>
+<p><span class="math display">\[
+\begin{cases}
+\frac{du}{dt}=\frac{\partial{u}}{\partial{t}}+u\frac{\partial{u}}{\partial{x}}+u\frac{\partial{v}}{\partial{y}}+u\frac{\partial{w}}{\partial{z}}\\
+\frac{dv}{dt}=\frac{\partial{v}}{\partial{t}}+v\frac{\partial{u}}{\partial{x}}+v\frac{\partial{v}}{\partial{y}}+v\frac{\partial{w}}{\partial{z}}\\
+\frac{dw}{dt}=\frac{\partial{u}}{\partial{t}}+w\frac{\partial{u}}{\partial{x}}+w\frac{\partial{v}}{\partial{y}}+w\frac{\partial{w}}{\partial{z}}
+\end{cases}
+\]</span></p>
+<p><span class="math display">\[
+\frac{D\vec{V}}{Dt}=\frac{\partial{\vec{V}}}{\partial{t}}+(\nabla{\cdot}\vec{V})\vec{V}
+\]</span></p>
+<p><span class="math display">\[
+\frac{D\Phi}{Dt}=\frac{\partial{\Phi}}{\partial{t}}+(\nabla{\cdot}\Phi)\vec{V}
+\]</span></p>
+<h4 id="高斯公式">4.3高斯公式</h4>
+<p>高斯公式又称散度定理，可以写为： <span class="math display">\[
+\iiint({\nabla{\cdot}}\vec{\Phi}){\rm dB}=\oint({\vec{\Phi}\cdot{\vec{n}}}){\rm dS}
+\]</span> 其中<span class="math inline">\(\Phi\)</span>为任意向量，公式左侧项为任意矢量的散度在一个空间内的体积分，表示了该空间内某种量的净生成量。公式右侧项为该矢量在包围这个空间的封闭表面的通过量。该公式描述了物理性质的守恒的特性，可以理解为：一个空间内的净生成量等于净流出量。</p>
+<ul>
+<li><p>公式右侧项表示控制体(Control Volume, CV)，右侧项为包围控制体的控制面(Control Surface, CS)。</p></li>
+<li><p>该公式的主要作用为将面积分转变为体积分，使得方便化简公式。</p></li>
+</ul>
+<p>将替<span class="math inline">\(\Phi\)</span>换为<span class="math inline">\(\vec{V}\)</span>后为： <span class="math display">\[
+\iiint({\nabla{\cdot}}\vec{V}){\rm dB}=\oint({\vec{V}\cdot{\vec{n}}}){\rm dS}
+\]</span> 该式子表示：控制体内流体体积的增加量等于通过控制面流出的流体体积。</p>
+<h4 id="散度的意义">4.4散度的意义</h4>
+<p>由高斯公式可以推导出速度的散度的意义： <span class="math display">\[
+\nabla{\cdot}{\vec{V}}=\frac{1}{\delta{B}}\frac{ { d {(\delta { B } ) } } }{d{t}}
+\]</span> 推导过程如下：</p>
+<ol type="1">
+<li>单位时间内流体控制体体积的变化为：</li>
+</ol>
+<p><span class="math display">\[
+\frac { { \rm d { B } } } { { \rm d { t } } } =\oint(\vec{V}\cdot{\vec{n}}){\rm dS}
+\]</span></p>
+<ol start="2" type="1">
+<li>因高斯公式，可有如下公式：</li>
+</ol>
+<p><span class="math display">\[
+\begin{aligned}
+\frac { { \rm d { B } } } { {\rm d { t } } } &amp;=\oint(\vec{V}\cdot{\vec{n}}){\rm dS}\\
+&amp;=\iiint( { \nabla { \cdot} {\vec { V } } } ){\rm dB}
+\end{aligned}
+\]</span></p>
+<ol start="3" type="1">
+<li>当控制体足够小时，右侧三重积分可去除，则公式可变为：</li>
+</ol>
+<p><span class="math display">\[
+\frac { { \rm d( { \delta { B } } ) } } { {\rm dt } }=\nabla{\cdot}\vec{V}{\rm d({\delta{B})}}\\
+\frac{1} { { \rm d( { \delta { B } ) } } } \frac{ { \rm d( { \delta { B } } ) } } { { \rm dt } } =\nabla{\cdot}\vec{V}
+\]</span></p>
 
         </div>
 
