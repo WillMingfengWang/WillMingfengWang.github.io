@@ -41,6 +41,45 @@
     
     
         
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
     
 
 
@@ -143,7 +182,63 @@
         </header>
 
         <div class="post-content">
-            
+            <h3 id="关于euler法和lagrange法在三大守恒定律的应用">1.关于Euler法和Lagrange法在三大守恒定律的应用</h3>
+<blockquote>
+<p>由于流体的运动学和力学属性都是针对流体质点的，例如，速度和加速度的定义以及牛顿第二定律，当采用欧拉法时，需要一个能把针对流体质点的变化转换到针对空间变化的关系式，这个关系是就是前边的物质导数。</p>
+<p>当针对流体流体体系时，用积分方法联系拉格朗日法和欧拉法的关系是称为雷诺输运定理。</p>
+</blockquote>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">欧拉法 Euler</th>
+<th style="text-align: left;">拉格朗日法 Lagrange</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">控制体(Control Volume)和控制面(Control Surface)</td>
+<td style="text-align: left;">体系(System) 和环境(Environment)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">空间</td>
+<td style="text-align: left;">质点</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">微分法</td>
+<td style="text-align: left;">积分法</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>物质导数给出了在欧拉坐标系下如何表达流体质点的性质随时间的变化，雷诺输运定理给出了在欧拉坐标系下如何表达流体团（即体系）随时间的变化。</p>
+<p>《我所理解的流体力学》P42</p>
+</blockquote>
+<h4 id="物质导数和雷诺输运定理">1.1物质导数和雷诺输运定理</h4>
+<p><span class="math display">\[
+\frac{\rm D\Phi}{\rm Dt}=\frac{\partial\Phi}{\partial{t}}+(\vec{V}\cdot\nabla)\Phi
+\]</span></p>
+<p>式中，<span class="math inline">\(\Phi\)</span> 为流体的某种性质。</p>
+<blockquote>
+<p>物质导数的定义中，质点性质的变化率是采用拉格朗日Lagrange法跟随流体质点得到的，但用的是欧拉坐标系，因此此物质导数其实是联系拉格朗日法和欧拉法的一个公式，通过这个公式，可以把本来针对质点的各种定义和物理定律应用于欧拉坐标系的空间点上。</p>
+<p>《我所理解的流体力学》P39</p>
+</blockquote>
+<p><span class="math display">\[
+\frac{\rm d\Phi_{sys}}{\rm dt}=\frac{\rm d\Phi_{cv}}{\rm dt}+\iint\varphi(\vec{V}\cdot\vec{n}){\rm dA}
+\]</span></p>
+<p>式中，<span class="math inline">\(\varphi\)</span> 代表单位体积的 <span class="math inline">\(\Phi\)</span>；<span class="math inline">\(\rm dA\)</span> 表示控制面上的微元面积，右边第二项的积分表示了单位时间内净流出控制体的<span class="math inline">\(\Phi\)</span></p>
+<p>以上为物质导数和雷诺输运定理的表达式，且两者可以通过<strong>高斯定理</strong>进行转化推导。</p>
+<blockquote>
+<p>高斯公式 <span class="math display">\[
+\iiint(\nabla\vdot\vec{F})\rm dB=\iint(\vec{F}\cdot\vec{n})\rm dA\\
+\iiint(\nabla\vdot\varphi\vec{F})\rm dB=\iint\varphi(\vec{F}\cdot\vec{n})\rm dA
+\]</span> 式中，<span class="math inline">\(\varphi\)</span> 代表一个任意常数，在本书中用的较多的为第二个公式。</p>
+</blockquote>
+<blockquote>
+<p>物质导数和雷诺输运定理各项的意义</p>
+<figure>
+<img src="E:\Blog\MingfengBlog\source_posts\物质导数和雷诺输运定理.png" alt="" /><figcaption>物质导数和雷诺输运定理</figcaption>
+</figure>
+</blockquote>
 
         </div>
 
