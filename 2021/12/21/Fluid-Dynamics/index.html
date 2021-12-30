@@ -275,6 +275,7 @@ p_{s,x,left}&amp;=p+\frac{\partial{p}}{\partial{x}}(-\frac{dx}{2}-0)\\
 <ul>
 <li>Euler描述法和Lagrange描述法</li>
 <li>随体导数</li>
+<li>雷诺输运方程</li>
 </ul>
 <h4 id="流体运动的描述方法">2.1流体运动的描述方法</h4>
 <h4 id="随体导数">2.2随体导数</h4>
@@ -305,8 +306,12 @@ a_z=\frac{\partial{w}}{\partial{t}}+u\frac{\partial{w}}{\partial{x}}+v\frac{\par
 &amp;+[\frac{\partial{w}}{\partial{t}}+u\frac{\partial{u}}{\partial{x}}+v\frac{\partial{v}}{\partial{y}}+w\frac{\partial{w}}{\partial{x}}]\vec{k}
 \end{aligned}
 \]</span> 将其写为矢量形式： <span class="math display">\[
-\vec{a}=\frac{\partial{\vec{V}}}{\partial{t}}+(\vec{V}\cdot\nabla){\vec{V}}
+\begin{aligned}
+\vec{a}&amp;=\frac{\partial{D}}{\partial{t}}\\
+&amp;=\frac{\partial{\vec{V}}}{\partial{t}}+(\vec{V}\cdot\nabla){\vec{V}}
+\end{aligned}
 \]</span></p>
+<h4 id="雷诺输运方程">2.3雷诺输运方程</h4>
 <hr />
 <h3 id="基本方程">3.基本方程</h3>
 <h4 id="质量守恒定律-mass-equation">3.1质量守恒定律 Mass Equation</h4>
@@ -356,6 +361,172 @@ z:[\rho{w}+\frac{\partial{(\rho{w})}}{\partial{z}}{\rm dz}]{\rm {dxdy}}-\rho{w}{
 \frac{\partial{\rho}}{\partial{t}}+\nabla{\cdot}(\rho{\vec{V}})=0
 \]</span></p>
 <h4 id="动量守恒定律-momentum-equation">3.2动量守恒定律 Momentum Equation</h4>
+<h4 id="一般形式的动量方程和无粘流动的动量方程">3.2.1一般形式的动量方程和无粘流动的动量方程</h4>
+<p>由牛顿第二定律可知： <span class="math display">\[
+\begin{aligned}
+\vec{F}&amp;=\frac{\rm dp}{\rm dt}\\
+&amp;=m\vec{a}\\
+&amp;=\rho{\rm dxdydz}\frac { \rm { D\vec { V } } } {\rm{Dt}}
+\end{aligned}
+\]</span> 作用于流体微团的力可以分为体积力和表面力，体积力如下，其中<span class="math inline">\(\vec{f_b}\)</span>为单位质量的体积力： <span class="math display">\[
+\vec{F_b}=\vec{f_b}\rho{\rm dxdydz}
+\]</span> 接下来是表面力： <span class="math display">\[
+\begin{cases}
+f_{s,x}=\frac { \partial { \tau_ { xx } } }{\partial{x}}{\rm dx}{\rm dydz}+\frac { \partial { \tau_ { yx } } }{\partial{y}}{\rm dy}{\rm dxdz}+\frac { \partial { \tau_ { zx } } }{\partial{z}}{\rm dz}{\rm dxdy}\\
+f_{s,y}=\frac { \partial { \tau_ { xy } } }{\partial{x}}{\rm dx}{\rm dydz}+\frac { \partial { \tau_ { yy } } }{\partial{y}}{\rm dy}{\rm dxdz}+\frac { \partial { \tau_ { zy } } }{\partial{z}}{\rm dz}{\rm dxdy}\\
+f_{s,z}=\frac { \partial { \tau_ { xz } } }{\partial{x}}{\rm dx}{\rm dydz}+\frac { \partial { \tau_ { yz } } }{\partial{y}}{\rm dy}{\rm dxdz}+\frac { \partial { \tau_ { zz } } }{\partial{z}}{\rm dz}{\rm dxdy}
+\end{cases}
+\]</span> 综上： <span class="math display">\[
+\vec{F}=\vec{F_b}+\vec{F_s}
+\]</span> 对上式化简： <span class="math display">\[
+\begin{aligned}
+\frac { \rm { D\vec { V } } } {\rm{Dt}}\rho{\rm dxdydz}&amp;=\vec{f_b}\rho{\rm dxdydz}\\
+&amp;+(\frac { \partial { \tau_ { xx } } }{\partial{x}}{\rm dx}{\rm dydz}+\frac { \partial { \tau_ { yx } } }{\partial{y}}{\rm dy}{\rm dxdz}+\frac { \partial { \tau_ { zx } } }{\partial{z}}{\rm dz}{\rm dxdy})\vec{i}\\
+&amp;+(\frac { \partial { \tau_ { xy } } }{\partial{x}}{\rm dx}{\rm dydz}+\frac { \partial { \tau_ { yy } } }{\partial{y}}{\rm dy}{\rm dxdz}+\frac { \partial { \tau_ { zy } } }{\partial{z}}{\rm dz}{\rm dxdy})\vec{j}\\
+&amp;+(\frac { \partial { \tau_ { xz } } }{\partial{x}}{\rm dx}{\rm dydz}+\frac { \partial { \tau_ { yz } } }{\partial{y}}{\rm dy}{\rm dxdz}+\frac { \partial { \tau_ { zz } } }{\partial{z}}{\rm dz}{\rm dxdy})\vec{k}
+\end{aligned}
+\]</span> 对上式同时消去<span class="math inline">\({\rm dxdydz}\)</span>后得： <span class="math display">\[
+\begin{aligned}
+\frac { \rm { D\vec { V } } } {\rm{Dt}}&amp;=\vec{f_b}\\
+&amp;+\frac{1}{\rho}(\frac { \partial { \tau_ { xx } } }{\partial{x}}+\frac { \partial { \tau_ { yx } } }{\partial{y}}+\frac { \partial { \tau_ { zx } } }{\partial{z}})\vec{i}\\
+&amp;+\frac{1}{\rho}(\frac { \partial { \tau_ { xy } } }{\partial{x}}+\frac { \partial { \tau_ { yy } } }{\partial{y}}+\frac { \partial { \tau_ { zy } } }{\partial{z}})\vec{j}\\
+&amp;+\frac{1}{\rho}(\frac { \partial { \tau_ { xz } } }{\partial{x}}+\frac { \partial { \tau_ { yz } } }{\partial{y}}+\frac { \partial { \tau_ { zz } } }{\partial{z}})\vec{k}
+\end{aligned}
+\]</span> 将其表示为矢量形式为，需注意<span class="math inline">\(\tau\)</span>为二阶张量： <span class="math display">\[
+\frac { \rm { D\vec { V } } } {\rm{Dt}}=\vec{f_b}+\frac{1}{\rho}\nabla\cdot\tau
+\]</span> 该公式便为动量方程Momentum Equation，但是不实用因为其中以下六个分量<span class="math inline">\(\tau_{xy},\tau_{yx},\tau_{xz},\tau_{zx},\tau_{yz},\tau_{zy}\)</span>并不容易求得。所以，欧拉基于流体的粘性力相较于压力较小，在一些问题的求解中可以忽略不记，并给出以下公式： <span class="math display">\[
+\begin{cases}
+\tau_{xy}=\tau_{yx}=0\\
+\tau_{xz}=\tau_{zx}=0\\
+\tau_{yz}=\tau_{zy}=0\\
+\tau_{xx}=\tau_{yy}=\tau_{zz}=-p
+\end{cases}\\
+\]</span> 将上式代入动量方程后可得： <span class="math display">\[
+\frac { \rm { D\vec { V } } } {\rm{Dt}}=\vec{f_b}-\frac{1}{\rho}\nabla{p}
+\]</span> 该公式为<strong>无粘流动的动量方程</strong>，最早由欧拉提出，一般称为<strong>欧拉方程</strong>。公式左侧为单位质量流体动量随时间的改变，右侧第一项为体积力，右侧第二项为压力差。该公式的物理意义是：当流动为 无粘流动时，流体的运动只由两种力产生，一种时体积力，一种是压差力。对于体积力为重力的无粘流动，如果一个质点在加速，要么是在下落要么是在从高压区流向低压区。</p>
+<p>对于静止的流体，其公式左侧的一项为零，则可以化简为，为Euler静力学平衡方程： <span class="math display">\[
+\vec{f_b}=\frac{1}{\rho}\nabla{p}
+\]</span></p>
+<h4 id="加入剪切力具体表达形式的动量方程">3.2.2加入剪切力具体表达形式的动量方程</h4>
+<p><strong>牛顿内摩擦</strong>定理为： <span class="math display">\[
+\tau=\mu\frac{\partial{u}}{\partial{y}}
+\]</span> 该公式只是表示作用于垂直于<span class="math inline">\(y\)</span>轴的平面上指向<span class="math inline">\(x\)</span>轴的剪切力，实际上为<span class="math inline">\(\tau_{yx}\)</span>，当流动不是平行流动时，牛顿流体的<strong>剪切力</strong>的表达形式为（<strong>本构方程1</strong>）： <span class="math display">\[
+\begin{cases}
+\tau_{xy}=\tau{yx}=\mu(\frac{\partial{v}}{\partial{x}}+\frac{\partial{u}}{\partial{y}})\\
+\tau_{xz}=\tau{zx}=\mu(\frac{\partial{w}}{\partial{x}}+\frac{\partial{u}}{\partial{z}})\\
+\tau_{yz}=\tau{zy}=\mu(\frac{\partial{w}}{\partial{y}}+\frac{\partial{u}}{\partial{z}})
+\end{cases}
+\]</span> 在欧拉方程中，我们假设<span class="math inline">\(\tau_{xx}=\tau_{yy}=\tau_{zz}=-p\)</span>，其实正应力中并不是只有<strong>压力</strong>，粘性力也会产生一部分正应力，否则流体微元就不能满足平衡关系了。因此，<strong>斯托克斯Stoke</strong>提出了正应力关系（<strong>本构方程2</strong>）： <span class="math display">\[
+\begin{cases}
+\tau_{xx}=2\mu\frac{\partial{u}}{\partial{x}}-\frac{2}{3}\mu(\nabla\cdot\vec{V})-p\\
+\tau_{yy}=2\mu\frac{\partial{y}}{\partial{y}}-\frac{2}{3}\mu(\nabla\cdot\vec{V})-p\\
+\tau_{zz}=2\mu\frac{\partial{w}}{\partial{z}}-\frac{2}{3}\mu(\nabla\cdot\vec{V})-p
+\end{cases}
+\]</span> 将其化简后可得正应力的展开形式： <span class="math display">\[
+\begin{cases}
+\begin{aligned}
+\tau_{xx}&amp;=2\mu\frac{\partial{u}}{\partial{x}}-\frac{2}{3}\mu(\nabla\cdot\vec{V})-p\\
+&amp;=2\mu\frac{\partial{u}}{\partial{x}}-\frac{2}{3}\mu\frac{\partial{u}}{\partial{x}}-\frac{2}{3}\mu\frac{\partial{v}}{\partial{y}}-\frac{2}{3}\mu\frac{\partial{w}}{\partial{z}}-p\\
+&amp;=\frac{4}{3}\mu\frac{\partial{u}}{\partial{x}}-\frac{2}{3}\mu\frac{\partial{v}}{\partial{y}}-\frac{2}{3}\mu\frac{\partial{w}}{\partial{z}}-p\\
+\end{aligned}\\
+\begin{aligned}
+\tau_{yy}&amp;=2\mu\frac{\partial{v}}{\partial{y}}-\frac{2}{3}\mu(\nabla\cdot\vec{V})-p\\
+&amp;=2\mu\frac{\partial{v}}{\partial{y}}-\frac{2}{3}\mu\frac{\partial{u}}{\partial{x}}-\frac{2}{3}\mu\frac{\partial{v}}{\partial{y}}-\frac{2}{3}\mu\frac{\partial{w}}{\partial{z}}-p\\
+&amp;=\frac{2}{3}\mu\frac{\partial{u}}{\partial{x}}-\frac{4}{3}\mu\frac{\partial{v}}{\partial{y}}-\frac{2}{3}\mu\frac{\partial{w}}{\partial{z}}-p\\
+\end{aligned}\\
+\begin{aligned}
+\tau_{zz}&amp;=2\mu\frac{\partial{w}}{\partial{z}}-\frac{2}{3}\mu(\nabla\cdot\vec{V})-p\\
+&amp;=2\mu\frac{\partial{w}}{\partial{z}}-\frac{2}{3}\mu\frac{\partial{u}}{\partial{x}}-\frac{2}{3}\mu\frac{\partial{v}}{\partial{y}}-\frac{2}{3}\mu\frac{\partial{w}}{\partial{z}}-p\\
+&amp;=\frac{2}{3}\mu\frac{\partial{u}}{\partial{x}}-\frac{2}{3}\mu\frac{\partial{v}}{\partial{y}}-\frac{4}{3}\mu\frac{\partial{w}}{\partial{z}}-p
+\end{aligned}
+\end{cases}
+\]</span> 其中，粘性正应力为： <span class="math display">\[
+\begin{cases}
+\begin{aligned}
+\tau_{xx}&amp;=2\mu\frac{\partial{u}}{\partial{x}}-\frac{2}{3}\mu(\nabla\cdot\vec{V})\\
+&amp;=\frac{4}{3}\mu\frac{\partial{u}}{\partial{x}}-\frac{2}{3}\mu\frac{\partial{v}}{\partial{y}}-\frac{2}{3}\mu\frac{\partial{w}}{\partial{z}}\\
+\end{aligned}\\
+\begin{aligned}
+\tau_{yy}&amp;=2\mu\frac{\partial{v}}{\partial{y}}-\frac{2}{3}\mu(\nabla\cdot\vec{V})\\
+&amp;=\frac{2}{3}\mu\frac{\partial{u}}{\partial{x}}-\frac{4}{3}\mu\frac{\partial{v}}{\partial{y}}-\frac{2}{3}\mu\frac{\partial{w}}{\partial{z}}\\
+\end{aligned}\\
+\begin{aligned}
+\tau_{zz}&amp;=2\mu\frac{\partial{w}}{\partial{z}}-\frac{2}{3}\mu(\nabla\cdot\vec{V})\\
+&amp;=\frac{2}{3}\mu\frac{\partial{u}}{\partial{x}}-\frac{2}{3}\mu\frac{\partial{v}}{\partial{y}}-\frac{4}{3}\mu\frac{\partial{w}}{\partial{z}}
+\end{aligned}
+\end{cases}
+\]</span> 针对不可压缩流体<span class="math inline">\(\nabla\cdot\vec{V}=0\)</span>，可得粘性正应力为： <span class="math display">\[
+\begin{cases}
+\tau_{xx}&amp;=2\mu\frac{\partial{u}}{\partial{x}}\\
+\tau_{yy}&amp;=2\mu\frac{\partial{v}}{\partial{y}}\\
+\tau_{zz}&amp;=2\mu\frac{\partial{w}}{\partial{z}}
+\end{cases}
+\]</span> 由上式可见，粘性正应力一般为正直即表示为拉力，其相对于压力较小，可忽略不计。</p>
+<p>将两个<strong>本构方程</strong>带入动量方程可得著名的纳维-斯托克斯方程，简称N-S方程，其展开形式为： <span class="math display">\[
+\begin{cases}
+\begin{aligned}
+\rho\frac{\partial{u}}{\partial{t}}+\rho{u}\frac{\partial{u}}{\partial{x}}+\rho{v}\frac{\partial{u}}{\partial{y}}+\rho{w}\frac{\partial{u}}{\partial{z}}&amp;=\rho{f_{b,x}}\\
+&amp;+2\mu\frac{\partial{\frac{\partial{u}}{\partial{x}}}}{\partial{x}}-\frac{2}{3}\mu\frac{\partial({\frac{\partial{u}}{\partial{x}}+\frac{\partial{v}}{\partial{y}}+\frac{\partial{w}}{\partial{z}})}}{\partial{x}}-\frac{\partial{p}}{\partial{x}}\\
+&amp;+\frac{\mu(\frac{\partial{u}}{\partial{y}}+\frac{\partial{v}}{\partial{x}})}{\partial{y}}\\
+&amp;+\frac{\mu(\frac{\partial{u}}{\partial{z}}+\frac{\partial{w}}{\partial{x}})}{\partial{z}}
+\end{aligned}\\
+\begin{aligned}
+\rho\frac{\partial{v}}{\partial{t}}+\rho{u}\frac{\partial{v}}{\partial{x}}+\rho{v}\frac{\partial{v}}{\partial{y}}+\rho{w}\frac{\partial{v}}{\partial{z}}&amp;=\rho{f_{b,y}}\\
+&amp;+\mu\frac{\partial{(\frac{\partial{v}}{\partial{x}}+\frac{\partial{u}}{\partial{y}})}}{\partial{x}}\\
+&amp;+2\mu\frac{\partial{\frac{\partial{v}}{\partial{y}}}}{\partial{y}}-\frac{2}{3}\mu\frac{\partial{(\frac{\partial{u}}{\partial{x}}+\frac{\partial{v}}{\partial{y}}+\frac{\partial{w}}{\partial{z}})}}{\partial{y}}-\frac{\partial{p}}{\partial{x}}\\
+&amp;+\frac{\mu(\frac{\partial{v}}{\partial{z}}+\frac{\partial{w}}{y})}{\partial{z}}\\
+\end{aligned}\\
+\begin{aligned}
+\rho\frac{\partial{w}}{\partial{t}}+\rho{u}\frac{\partial{w}}{\partial{x}}+\rho{v}\frac{\partial{w}}{\partial{y}}+\rho{w}\frac{\partial{w}}{\partial{z}}&amp;=\rho{f_{b,z}}\\
+&amp;+\mu\frac{\partial{(\frac{\partial{w}}{\partial{x}}+\frac{\partial{u}}{\partial{z}})}}{\partial{x}}\\
+&amp;+\mu\frac{\partial{(\frac{\partial{w}}{\partial{y}}+\frac{\partial{v}}{\partial{z}})}}{\partial{y}}\\
+&amp;+2\mu\frac{\partial{\frac{\partial{w}}{\partial{z}}}}{\partial{z}}-\frac{2}{3}\mu\frac{\partial{(\frac{\partial{u}}{\partial{x}}+\frac{\partial{v}}{\partial{y}}+\frac{\partial{w}}{\partial{z}})}}{\partial{z}}-\frac{\partial{p}}{\partial{z}}
+\end{aligned}
+\end{cases}
+\]</span> 将上式进一步展开： <span class="math display">\[
+\begin{cases}
+\begin{aligned}
+\rho\frac{\partial{u}}{\partial{t}}+\rho{u}\frac{\partial{u}}{\partial{x}}+\rho{v}\frac{\partial{u}}{\partial{y}}+\rho{w}\frac{\partial{u}}{\partial{z}}&amp;=\rho{f_{b,x}}-\frac{\partial{p}}{\partial{x}}\\
+&amp;+\mu\frac{\partial{\frac{\partial{u}}{\partial{x}}}}{\partial{x}}+\mu\frac{\partial{\frac{\partial{u}}{\partial{x}}}}{\partial{x}}-\frac{2}{3}\mu\frac{\partial({\frac{\partial{u}}{\partial{x}}+\frac{\partial{v}}{\partial{y}}+\frac{\partial{w}}{\partial{z}})}}{\partial{x}}\\
+&amp;+\mu\frac{\partial{\frac{\partial{u}}{\partial{y}}}}{\partial{y}}+\mu\frac{\partial{\frac{\partial{v}}{\partial{x}}}}{\partial{y}}\\
+&amp;+\mu\frac{\partial{\frac{\partial{w}}{\partial{x}}}}{\partial{z}}+\mu\frac{\partial{\frac{\partial{u}}{\partial{z}}}}{\partial{z}}
+\end{aligned}\\
+\begin{aligned}
+\rho\frac{\partial{v}}{\partial{t}}+\rho{u}\frac{\partial{v}}{\partial{x}}+\rho{v}\frac{\partial{v}}{\partial{y}}+\rho{w}\frac{\partial{v}}{\partial{z}}&amp;=\rho{f_{b,y}}-\frac{\partial{p}}{\partial{y}}\\
+&amp;+\mu\frac{\partial{\frac{\partial{u}}{\partial{y}}}}{\partial{x}}+\mu\frac{\partial{\frac{\partial{v}}{\partial{x}}}}{\partial{x}}\\
+&amp;+\mu\frac{\partial{\frac{\partial{v}}{\partial{y}}}}{\partial{y}}+\mu\frac{\partial{\frac{\partial{v}}{\partial{y}}}}{\partial{y}}-\frac{2}{3}\mu\frac{\partial({\frac{\partial{u}}{\partial{x}}+\frac{\partial{v}}{\partial{y}}+\frac{\partial{w}}{\partial{z}})}}{\partial{y}}\\
+&amp;+\mu\frac{\partial{\frac{\partial{w}}{\partial{y}}}}{\partial{z}}+\mu\frac{\partial{\frac{\partial{v}}{\partial{z}}}}{\partial{z}}
+\end{aligned}\\
+\begin{aligned}
+\rho\frac{\partial{w}}{\partial{t}}+\rho{u}\frac{\partial{w}}{\partial{x}}+\rho{v}\frac{\partial{w}}{\partial{y}}+\rho{w}\frac{\partial{w}}{\partial{z}}&amp;=\rho{f_{b,z}}-\frac{\partial{p}}{\partial{z}}\\
+&amp;+\mu\frac{\partial{\frac{\partial{w}}{\partial{x}}}}{\partial{x}}+\mu\frac{\partial{\frac{\partial{u}}{\partial{z}}}}{\partial{x}}\\
+&amp;+\mu\frac{\partial{\frac{\partial{v}}{\partial{z}}}}{\partial{y}}+\mu\frac{\partial{\frac{\partial{w}}{\partial{y}}}}{\partial{y}}\\
+&amp;+\mu\frac{\partial{\frac{\partial{w}}{\partial{z}}}}{\partial{z}}+\mu\frac{\partial{\frac{\partial{w}}{\partial{z}}}}{\partial{z}}-\frac{2}{3}\mu\frac{\partial({\frac{\partial{u}}{\partial{x}}+\frac{\partial{v}}{\partial{y}}+\frac{\partial{w}}{\partial{z}})}}{\partial{y}}
+\end{aligned}
+\end{cases}
+\]</span> 其中： <span class="math display">\[
+\begin{cases}
+\mu[\frac{\partial{\frac{\partial{u}}{\partial{x}}}}{\partial{x}}+\frac{\partial{\frac{\partial{u}}{\partial{y}}}}{\partial{y}}+\frac{\partial{\frac{\partial{u}}{\partial{z}}}}{\partial{z}}]\\
+\mu[\frac{\partial{\frac{\partial{v}}{\partial{x}}}}{\partial{x}}+\frac{\partial{\frac{\partial{v}}{\partial{y}}}}{\partial{y}}+\frac{\partial{\frac{\partial{v}}{\partial{z}}}}{\partial{z}}]\\
+\mu[\frac{\partial{\frac{\partial{w}}{\partial{x}}}}{\partial{x}}+\frac{\partial{\frac{\partial{w}}{\partial{y}}}}{\partial{y}}+\frac{\partial{\frac{\partial{w}}{\partial{z}}}}{\partial{z}}]
+\end{cases}\\
+=\mu\nabla\cdot\nabla\vec{V}
+\]</span> 又因： <span class="math display">\[
+\begin{cases}
+\mu\frac{\partial{\frac{\partial{v}}{\partial{x}}}}{\partial{y}}=\mu\frac{\partial{\frac{\partial{v}}{\partial{y}}}}{\partial{x}};\mu\frac{\partial{\frac{\partial{w}}{\partial{x}}}}{\partial{z}}=\mu\frac{\partial{\frac{\partial{w}}{\partial{z}}}}{\partial{x}}\\
+\mu\frac{\partial{\frac{\partial{u}}{\partial{y}}}}{\partial{x}}=\mu\frac{\partial{\frac{\partial{u}}{\partial{x}}}}{\partial{y}};\mu\frac{\partial{\frac{\partial{w}}{\partial{y}}}}{\partial{x}}=\mu\frac{\partial{\frac{\partial{w}}{\partial{x}}}}{\partial{y}}\\
+\mu\frac{\partial{\frac{\partial{u}}{\partial{z}}}}{\partial{x}}=\mu\frac{\partial{\frac{\partial{u}}{\partial{x}}}}{\partial{z}};\mu\frac{\partial{\frac{\partial{v}}{\partial{z}}}}{\partial{y}}=\mu\frac{\partial{\frac{\partial{v}}{\partial{y}}}}{\partial{z}}
+\end{cases}
+\]</span> 因此： <span class="math display">\[
+\begin{cases}
+\mu[\frac{\partial{(\frac{\partial{u}}{\partial{x}}+\frac{\partial{v}}{\partial{y}}+\frac{\partial{w}}{\partial{z}})}}{\partial{x}}]\\
+\mu[\frac{\partial{(\frac{\partial{u}}{\partial{x}}+\frac{\partial{v}}{\partial{y}}+\frac{\partial{w}}{\partial{z}})}}{\partial{y}}]\\
+\mu[\frac{\partial{(\frac{\partial{u}}{\partial{x}}+\frac{\partial{v}}{\partial{y}}+\frac{\partial{w}}{\partial{z}})}}{\partial{z}}]\\
+\end{cases}
+=\mu\nabla(\nabla\cdot\vec{V})
+\]</span> 综上，N-S方程的矢量形式为： <span class="math display">\[
+\frac { { \rm D } \vec { V } } { { \rm D } t } =\vec{f_b}-\frac{1}{\rho}\nabla{p}+\frac{\mu}{\rho}\nabla\cdot\nabla\vec{V}+\frac{1}{3}\frac{\mu}{\rho}\nabla(\nabla\cdot\vec{V})
+\]</span></p>
 <h4 id="能量守恒定律-energy-equation">3.3能量守恒定律 Energy Equation</h4>
 <h3 id="需要记忆的公式">4.需要记忆的公式</h3>
 <h4 id="欧拉静力学方程">4.1 欧拉静力学方程</h4>
@@ -420,6 +591,12 @@ f_{b,z}=\frac{1}{\rho}\frac{\partial{p_z}}{\partial{z}}
 \frac { { \rm d( { \delta { B } } ) } } { {\rm dt } }=\nabla{\cdot}\vec{V}{\rm d({\delta{B})}}\\
 \frac{1} { { \rm d( { \delta { B } ) } } } \frac{ { \rm d( { \delta { B } } ) } } { { \rm dt } } =\nabla{\cdot}\vec{V}
 \]</span></p>
+<h4 id="质量守恒方程conservation-equation">4.5质量守恒方程Conservation Equation</h4>
+<p>质量守恒方程又称连续性方程，以下方程是从Euler法的角度进行推导的结果： <span class="math display">\[
+\frac{\partial\rho}{\partial{t}}+\nabla\cdot(\rho\vec{V})=0
+\]</span> 展开式如下： <span class="math display">\[
+\frac{\partial\rho}{\partial{t}}+\frac{ \partial{ \rho{ u } } }{\partial{x}}+\frac{ \partial{ \rho{ v } } }{\partial{y}}+\frac{ \partial{ \rho{ w } } }{\partial{z}}=0
+\]</span></p>
 
         </div>
 
@@ -442,6 +619,8 @@ f_{b,z}=\frac{1}{\rho}\frac{\partial{p_z}}{\partial{z}}
             </div>
         </section>
         <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2021/12/24/Partial-Differential-Equation/">Partial Differential Equation</a>
             
             
             <a class="next" rel="next" href="/2021/12/20/About-Me/">About Me</a>
